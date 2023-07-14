@@ -6,9 +6,9 @@
 
 fun main() {
     // создаем объекты класса Users, присваиваем им аргументы
-    val user1 = Users("Макс", 25)
-    val user2 = Users("Гриша", 34)
-    val user3 = Users("Кирилл", 56)
+    val user1 = User("Макс", 25)
+    val user2 = User("Гриша", 34)
+    val user3 = User("Кирилл", 56)
 
     val userRepository = UserRepository()
     userRepository.save(user1)
@@ -23,22 +23,22 @@ fun main() {
 }
 
 // объявили класс, связанный с интерфейсом, где вместо T используем тип Users
-class UserRepository : Repository<Users> {
+class UserRepository : Repository<User> {
     // тут только приватные переменные
-    private val listOfUsers = mutableListOf<Users>()
+    private val listOfUsers = mutableListOf<User>()
 
     // переопределенная функция (полиморфизм) из интерфейса
-    override fun save(item: Users) {
+    override fun save(item: User) {
         listOfUsers.add(item)
     }
 
     // переопределенная функция (полиморфизм) из интерфейса
-    override fun delete(item: Users) {
+    override fun delete(item: User) {
         listOfUsers.remove(item)
     }
 
     // переопределенная функция (полиморфизм) из интерфейса
-    override fun getAll(): List<Users> {
+    override fun getAll(): List<User> {
         return listOfUsers
     }
 }
@@ -52,4 +52,4 @@ interface Repository<T> {
 }
 
 // храним здесь данные по Users
-data class Users(val name: String, val age: Int)
+data class User(val name: String, val age: Int)

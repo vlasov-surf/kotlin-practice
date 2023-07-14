@@ -13,27 +13,27 @@ fun main() {
 }
 
 // устанавливаем свойства класса приватными
-class Personal(var GetName: String = "", var GetAge: Int = 0) {
-    var name: String
+class Personal(name: String = "", age: Int = 0) {
+    var name: String = name
         // геттер для name контролирует чтение (получение) значения свойства
         get() {
-            return if (GetName.isNotEmpty()) GetName else "Имя не указано!"
+            return field.ifEmpty { "Имя не указано!" }
             // сеттер для name контролирует запись (установку) значения свойства
         }
         set(value) {
-            GetName = value
+            field = value
         }
 
-    var age: Int
+    var age: Int = age
         // геттер для age контролирует чтение (получение) значения свойства
         get() {
-            return GetAge
+            return field
         }
         // сеттер для age контролирует запись (установку) значения свойства
         set(value) {
             // проверка на отрицательный возраст
             if (value >= 0) {
-                GetAge = value
+                field = value
             } else {
                 println("Ваш возраст отрицательный!")
             }
